@@ -290,8 +290,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (5.1.0)
-      redis-client (>= 0.17.0)
+    redis (5.2.0)
+      redis-client (>= 0.22.0)
     redis-client (0.22.1)
       connection_pool
     regexp_parser (2.9.0)
@@ -451,7 +451,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails
   rails_live_reload
-  redis (~> 5.1)
+  redis (~> 5.2)
   rspec-html-matchers
   rspec-rails
   rubocop-rails
