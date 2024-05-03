@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'welcome/index'
+  resources :common_employee_projects
 
-  root 'welcome#index'
+  root 'common_employee_projects#index'
 end

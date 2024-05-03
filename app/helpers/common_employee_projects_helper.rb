@@ -1,0 +1,2 @@
+module CommonEmployeeProjectsHelper
+end

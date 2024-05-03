@@ -1,0 +1,31 @@
+<div class="col-md-12">
+    <p style="color: green"><%= notice %></p>
+
+    <h1 class="text-center">Common employee projects</h1>
+
+    <%= link_to "New common employee project", new_common_employee_project_path, class: 'col-12 btn btn-success text-center' %>
+
+    <% if @common_employee_projects %>
+    <div id="common_employee_projects" class="pt-5">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <td scope="col">File</td>
+                <td scope="col">Upload State</td>
+                <td scope="col">Actions</td>
+            </thead>
+            <tbody>
+                <% @common_employee_projects.each do |common_employee_project| %>
+                    <% next unless common_employee_project.file.file %>
+                    <tr>
+                        <%= render partial: 'common_employee_project_table_row', locals: { common_employee_project: common_employee_project } %>
+                        <td>
+                            <%= link_to "Show this common employee project", common_employee_project %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <% end %>
+
+</div>

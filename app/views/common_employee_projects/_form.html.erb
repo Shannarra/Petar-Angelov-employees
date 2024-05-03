@@ -1,0 +1,25 @@
+<%= form_with(model: common_employee_project, class: 'row justify-content-center') do |form| %>
+  <% if common_employee_project.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(common_employee_project.errors.count, "error") %> prohibited this common_employee_project from being saved:</h2>
+
+      <ul>
+        <% common_employee_project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group col-8 pb-2">
+      <div>
+          <%= form.label 'CSV file (only CSV accepted)', style: "display: block" %>
+          <%= form.file_field :file, class: 'form-control', accept: 'text/csv', required: true %>
+          <%= form.hidden_field :file_cache, class: 'form-control' %>
+      </div>
+  </div>
+
+  <div class="form-group col-md-8">
+    <%= form.submit class: 'btn btn-success col-12' %>
+  </div>
+<% end %>
