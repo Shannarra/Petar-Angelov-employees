@@ -14,21 +14,20 @@ RSpec.describe CommonEmployeeProjectsController, type: :routing do
       expect(get: "/common_employee_projects/1").to route_to("common_employee_projects#show", id: "1")
     end
 
-    it "routes to #edit" do
-      expect(get: "/common_employee_projects/1/edit").to route_to("common_employee_projects#edit", id: "1")
+    it "does NOT route to #edit" do
+      expect(get: "/common_employee_projects/1/edit").not_to route_to("common_employee_projects#edit", id: "1")
     end
-
 
     it "routes to #create" do
       expect(post: "/common_employee_projects").to route_to("common_employee_projects#create")
     end
 
-    it "routes to #update via PUT" do
-      expect(put: "/common_employee_projects/1").to route_to("common_employee_projects#update", id: "1")
+    it "does NOT route to #update via PUT" do
+      expect(put: "/common_employee_projects/1").not_to route_to("common_employee_projects#update", id: "1")
     end
 
-    it "routes to #update via PATCH" do
-      expect(patch: "/common_employee_projects/1").to route_to("common_employee_projects#update", id: "1")
+    it "does NOT route to #update via PATCH" do
+      expect(patch: "/common_employee_projects/1").not_to route_to("common_employee_projects#update", id: "1")
     end
 
     it "routes to #destroy" do

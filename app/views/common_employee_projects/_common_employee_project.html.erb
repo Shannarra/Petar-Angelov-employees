@@ -1,17 +1,47 @@
 <div class="row justify-content-center">
     <p class="text-center h2">
         <strong>File:</strong>
-        <%= link_to 'File', common_employee_project.file.url %>
+        <%= link_to project_file_name(common_employee_project), common_employee_project&.file&.url %>
     </p>
 
-    <p class="text-center h4">
-        <strong>Upload state:</strong>
-        <%= common_employee_project.upload_state %>
-    </p>
+    <% state = common_employee_project.upload_state %>
 
-    <h1>Ugly ass result json:</h1>
-    <p class="text-center">
-      <%= common_employee_project.projects_info %>
-    </p>
-    
+    <h2 class="text-center <%= text_color_from_state(state) %> m-0 p-0">
+        Upload <%= common_employee_project.errorneous? ? 'has failed' : 'was successful' %>!
+    </h2>
+
+    <% if state == 'errorneous' %>
+        <h4 class="text-center">
+            Reason: The uploaded file was not in the correct format.
+        </h4>
+    <% else %>
+        <div class="m-2">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <td scope="col"><b>Rank</b></td>
+                    <td scope="col"><b>Employee A</b></td>
+                    <td scope="col"><b>Employee B</b></td>
+                    <td scope="col"><b>Total Days</b></td>
+                    <td scope="col"><b>Additional details</b></td>
+                </thead>
+                <tbody>
+                    <% sorted_projects_info(common_employee_project).each_with_index do |hash, idx| %>
+                        <tr>
+                            <td><b><%= idx + 1 %></b></td>
+                            <td><%= hash['employee_a'] %></td>
+                            <td><%= hash['employee_b'] %></td>
+                            <td><%= hash['sum'] %></td>
+                            <td>
+                                <ul>
+                                    <% hash['details'].sort { |x, y| y['days'] - x['days'] }.each do |common_project| %>
+                                        <li>Project: <%= common_project['project'] %>: <%= common_project['days'] %> days</li>
+                                    <% end %>
+                                </ul>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    <% end %>
 </div>

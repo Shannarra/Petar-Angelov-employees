@@ -1,6 +1,6 @@
 class CommonEmployeeProjectsController < InheritedResources::Base
   def create
-    create!(notice: 'Project upload started successfully!', alert: @errors) { root_url }
+    create!(notice: 'Project upload started successfully!', alert: @errors)
   end
 
   private

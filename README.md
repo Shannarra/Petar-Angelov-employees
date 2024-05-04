@@ -1,60 +1,76 @@
-# Rails 7 Template application [![Ruby](https://github.com/Shannarra/Petar-Angelov-employees/actions/workflows/ruby.yml/badge.svg)](https://github.com/Shannarra/Petar-Angelov-employees/actions/workflows/ruby.yml)
+# Employees app
 
-This app demonstrates Rails 7 with PostgreSQL, import maps, turbo, stimulus, bootstrap and hotwire, all running in Docker.  
-You can also bootstrap the application with authentication frameworks like Devise in order to ease your work. 
+This is a fully-functioning Rails application running on Docker that solves the employees task.
 
-## Features
-* Rails 7
-* Ruby 3
-* Bootstrap
-* Dockerfile and Docker Compose configuration
-* PostgreSQL database
-* Redis
-* GitHub Actions for
-  * tests
-  * Rubocop for linting
-  * Security checks with [Brakeman](https://github.com/presidentbeef/brakeman) and [bundler-audit](https://github.com/rubysec/bundler-audit)
-* Dependabot for automated updates
+It has been built upon my own [template application](https://github.com/Shannarra/rails7template), made so one can easily and painlessly bootstrap a Rails 7 application using Docker, with its own integrated CI/CD pipeline in GitHub Actions. This ensures that the app is up to engineering standards, including latest versions of Rails, Ruby and security checks (via Bundler Audit and Brakeman).
 
-#### Optional features:
-* Authentication with Devise
-  * See [Devise setup](#devise-setup) for more info
+## How it works
+The app itself consists of a simple model (called [`CommonEmployeeProject`](https://github.com/Shannarra/Petar-Angelov-employees/blob/master/app/models/common_employee_project.rb)) that allows for multiple file uploads.
 
-## Requirements
+The uploads themselves are handled by a very simple, but effective gem called [Carrierwave](https://github.com/carrierwaveuploader/carrierwave), allowing for extended options for what and where to store. For the purpose of this application, the app will allow only **CSV** files to be stored, as per requirements. You can see the uploader that handles it [here](https://github.com/Shannarra/Petar-Angelov-employees/blob/master/app/uploaders/common_employee_project_uploader.rb).
 
-Please ensure you are using Docker Compose V2. This project relies on the `docker compose` command, not the previous `docker-compose` standalone program.
+When a new `CommonEmployeeProject` record is saved to the database, the application will automatically start a Sidekiq background job asynchronously, that will handle parsing the CSV file provided, manipulates the data and stores it to the corresponding project record. 
 
-https://docs.docker.com/compose/#compose-v2-and-the-new-docker-compose-command
+### The worker
+The background worker (workers got renamed to "jobs", but the API of the gem is still the same) can be found in the folder (app/sidekiq/find_employees_that_worked_longest_job.rb)[https://github.com/Shannarra/Petar-Angelov-employees/blob/master/app/sidekiq/find_employees_that_worked_longest_job.rb].
 
-Check your docker compose version with:
-```
-$ docker compose version
-Docker Compose version v2.20.2
-```
+It works in several steps:
 
-## Initial setup
+1. Initiate
+The worker selects the latest `CommonEmployeeProject` that has been requested and updates its upload state to "processing". 
+After that, it tries to parse the CSV file provided. If file is not in the correct format the upload state is directly set to "errorneous" and all work is stopped immediately.
+
+2. Group Employees project-wise
+Parse the file line by line, grouping all employees based on the projects they have worked, whilst keeping the information relatively unchanged.
+
+ALL date formats are supported, so long as they can adhere to the core Ruby [Date#parse](https://ruby-doc.org/stdlib-1.9.3/libdoc/date/rdoc/Date.html#method-c-parse) method. This means that the data is not constrained to one date format, and you can use whichever one you like. :)
+
+3. After the employees have been grouped
+Now we'd need to match the employees that have any overlap on one or more projects and collect relevant information. We can do this in several simple steps:
+
+  3.0 Iterate through all projects, and for each project, iterate through all employees
+  3.1 Skip the current iteration if we are matching the same employee twice
+  3.2 Collect the tenure of the two employees, if it does not have any overlap - no need to do anything - so, skip this iteration.
+  3.3 If there is some overlap, prepare the table that stores the valuable overlap information (if needed)
+  3.4 Convert the employment overlap from a Date range to days and store it, increment the total amount the two employees have worked together
+
+4. Sanitize and save
+After the data has been collected, clean it up, serialize it and store it into the project object. Mark the upload state to "uploaded" and enjoy :)
+
+### Additional
+Usually, Sidekiq workers ("jobs") are to be run via a rake task that gets executed from a scheduler (a cronjob in most cases). 
+
+There is a task that can run the job (see `lib/tasks/upload_files.rake`), but either needs to be run manually via `rake upload_files:run`, or to be run in a crontab. Note that this will run all of the `CommonEmployeeProject`s that need to be run.
+
+
+## Development setup
+###### Please, make sure that you have turned your postgresql service off or you will be greeted with an error message saying that port 5432 is taken.
+###### You can do that by running the command `sudo systemctl stop postgresql`
 
 You can just run the [startup.sh](https://github.com/Shannarra/rails7template/edit/master/startup.sh) script:
 ```console
-sh ./startup.sh
-```
-This will bootstrap a Rails 7 application that has some sample data but misses a lot of features, for example, it has no authentication.
-
-If you want to have built-in authentication with Devise you can do the following:
-
-<details>
-<summary> <h3>Devise setup</h3> (optional)</summary>
-Setting the application up to work with Devise is very straightforward, just a single command:
-
-```console
-sh startup.sh --devise user
+sh ./startup.sh --run
 ```
 
-In this case, the application will be created with authentication mechanism for a model called "User".  
-The given model will be created, migrated and integrated with the application upon startup.
-</details>
+This will bootstrap the application, setup a database and migrate it to the latest version, install all dependencies AND start a local server on localhost:3000
 
-### Extras
+Alternatively, if you can't run the shell script, you can bootstrap the application yourself by running the following few commands:
+
+```sh
+# make sure the binaries of the project have the privileges to work as expected
+chmod u+x -R ./bin/*
+
+# copy/rename the environment variables file
+cp .env.example .env
+
+# build the initial containers
+docker compose build
+
+# setup the database, including migrations and seeding
+docker compose run --rm web rails db:setup
+```
+
+### Using the app after setup
 Using the `startup.sh` script, you can skip the next step and make it so the application starts immediately after it has been built:
 ```console
 sh startup.sh --run # -r works as well :) 
@@ -64,73 +80,6 @@ If you want to learn more about this script you can just call the `--help` optio
 
 ## Running the Rails app
 ```console
-docker compose up
-```
-Then just navigate to http://localhost:3000
-
-## Running the Rails console
-When the app is already running with `docker-compose` up, attach to the container:
-```console
-docker compose exec web bin/rails c
-```
-
-When no container running yet, start up a new one:
-```console
-docker compose run --rm web bin/rails c
-```
-
-## Running tests
-```console
-docker compose run --rm web bin/rspec
-```
-
-## Time localization
-If you want to change the timezone to your specific locale you can do this very simply, just change the TIMEZONE variable in the .env file:
-
-```console
-# TODO: change to CET, EET or wherever you live
-TIMEZONE=UTC
-```
-
-## Updating gems
-```console
-docker compose run --rm web bundle
 docker compose up --build
 ```
-
-## Production build
-
-```console
-docker build -f production.Dockerfile .
-```
-
-## Deployment
-
-This app can be hosted wherever Ruby is supported and PostgreSQL databases can be provisioned.
-
-#### Render
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=[https://github.com/Shannarra/rails7template](https://github.com/Shannarra/rails7template))
-
-NOTE: You will need to generate a production secret with `bin/rails secret` and set it as the `SECRET_KEY_BASE` environment variable.
-
-## Credits/References
-
-### Rails with Docker
-* [Quickstart: Compose and Rails](https://docs.docker.com/compose/rails/)
-* [Docker for Rails Developers
-Build, Ship, and Run Your Applications Everywhere](https://pragprog.com/titles/ridocker/docker-for-rails-developers/)
-* [Ruby on Whales:
-Dockerizing Ruby and Rails development](https://evilmartians.com/chronicles/ruby-on-whales-docker-for-ruby-rails-development)
-* [Original inspiration repo](https://github.com/ryanwi/rails7-on-docker)
-
-### Rails 7 with importmaps
-
-* [Alpha preview: Modern JavaScript in Rails 7 without Webpack](https://www.youtube.com/watch?v=PtxZvFnL2i0)
-
-### Rails 7 with hotwire
-
-* [Stimulus 3 + Turbo 7 = Hotwire 1.0](https://world.hey.com/dhh/stimulus-3-turbo-7-hotwire-1-0-9d507133)
-* [Turbo 7](https://world.hey.com/hotwired/turbo-7-0dd7a27f)
-* [Rails 7 will have three great answers to JavaScript in 2021+](https://world.hey.com/dhh/rails-7-will-have-three-great-answers-to-javascript-in-2021-8d68191b)
-* [Hotwire Turbo Replacing Rails UJS](https://www.driftingruby.com/episodes/hotwire-turbo-replacing-rails-ujs)
+Then just navigate to http://localhost:3000

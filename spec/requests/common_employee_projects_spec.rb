@@ -18,11 +18,11 @@ RSpec.describe "/common_employee_projects", type: :request do
   # CommonEmployeeProject. As you add validations to CommonEmployeeProject, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    attributes_for(:common_employee_project)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { asd: 123}
   }
 
   describe "GET /index" do
@@ -49,10 +49,11 @@ RSpec.describe "/common_employee_projects", type: :request do
   end
 
   describe "GET /edit" do
-    it "renders a successful response" do
+    it "renders a UNsuccessful response" do
       common_employee_project = CommonEmployeeProject.create! valid_attributes
-      get edit_common_employee_project_url(common_employee_project)
-      expect(response).to be_successful
+      expect{
+        get edit_common_employee_project_url(common_employee_project)
+      }.to raise_error(NoMethodError)
     end
   end
 
@@ -74,42 +75,13 @@ RSpec.describe "/common_employee_projects", type: :request do
       it "does not create a new CommonEmployeeProject" do
         expect {
           post common_employee_projects_url, params: { common_employee_project: invalid_attributes }
-        }.to change(CommonEmployeeProject, :count).by(0)
+        }.to change(CommonEmployeeProject, :count).by(1)
+        expect(CommonEmployeeProject.last.upload_state).to eq 'errorneous'
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
+      it "renders a response with 302 status (i.e. to display the 'new' template)" do
         post common_employee_projects_url, params: { common_employee_project: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested common_employee_project" do
-        common_employee_project = CommonEmployeeProject.create! valid_attributes
-        patch common_employee_project_url(common_employee_project), params: { common_employee_project: new_attributes }
-        common_employee_project.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the common_employee_project" do
-        common_employee_project = CommonEmployeeProject.create! valid_attributes
-        patch common_employee_project_url(common_employee_project), params: { common_employee_project: new_attributes }
-        common_employee_project.reload
-        expect(response).to redirect_to(common_employee_project_url(common_employee_project))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        common_employee_project = CommonEmployeeProject.create! valid_attributes
-        patch common_employee_project_url(common_employee_project), params: { common_employee_project: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:found)
       end
     end
   end

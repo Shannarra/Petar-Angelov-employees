@@ -1,9 +1,12 @@
 <td>
     <strong>File:</strong>
-    <%= link_to 'File', common_employee_project.file.url %>
+    <%= link_to File.basename(common_employee_project&.file&.file.file), common_employee_project&.file&.url %>
 </td>
 
 <td>
-    <strong>Upload state:</strong>
-    <%= common_employee_project.upload_state %>
+    <strong>Upload <%= upload_verb(common_employee_project) %>:</strong>
+    <% state = common_employee_project.upload_state %>
+    <p class="<%= text_color_from_state(state) %>">
+        <%= state %>
+    </p>
 </td>
