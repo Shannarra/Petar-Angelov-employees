@@ -28,11 +28,11 @@ ALL date formats are supported, so long as they can adhere to the core Ruby [Dat
 3. After the employees have been grouped
 Now we'd need to match the employees that have any overlap on one or more projects and collect relevant information. We can do this in several simple steps:
 
-  3.0 Iterate through all projects, and for each project, iterate through all employees
-  3.1 Skip the current iteration if we are matching the same employee twice
-  3.2 Collect the tenure of the two employees, if it does not have any overlap - no need to do anything - so, skip this iteration.
-  3.3 If there is some overlap, prepare the table that stores the valuable overlap information (if needed)
-  3.4 Convert the employment overlap from a Date range to days and store it, increment the total amount the two employees have worked together
+  - 3.0 Iterate through all projects, and for each project, iterate through all employees  
+  - 3.1 Skip the current iteration if we are matching the same employee twice  
+  - 3.2 Collect the tenure of the two employees, if it does not have any overlap - no need to do anything - so, skip this iteration.  
+  - 3.3 If there is some overlap, prepare the table that stores the valuable overlap information (if needed)  
+  - 3.4 Convert the employment overlap from a Date range to days and store it, increment the total amount the two employees have worked together  
 
 4. Sanitize and save
 After the data has been collected, clean it up, serialize it and store it into the project object. Mark the upload state to "uploaded" and enjoy :)
