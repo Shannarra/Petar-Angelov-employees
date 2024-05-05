@@ -81,12 +81,18 @@ class FindEmployeesThatWorkedLongestJob
   end
 
   def sanitize_and_save_combined_data!(combined)
-    # sort the combined information, get only the values
+    # sort the combined information,
+    # get only the values
+    # sort them by the total sum of days,
+    # get the unique ones,
     # and serialize them to JSON
+
     serialized = combined
                    .sort
-                   .to_h
-                   .values
+                   .map(&:second)
+                   .sort { |x, y| y[:sum] - x[:sum] }
+                   .select
+                   .each_with_index{|_, i| i.even? }
                    .to_json
 
     # Then update the upload page one final time

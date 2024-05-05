@@ -1,0 +1,48 @@
+Institution Info
+ ,Institution,Users Count,Classes Count,Subjects Count
+ ,manageR institute,5,9,10
+
+Classes Info
+ ,Medicine 330
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,Business 293
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,asdasd lkasdd kjasdlkasd
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,another new test class
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,another test 543246874968479684797
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,asdasd
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,asdsadsad
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+ ,New test class created
+ , ,Associated Users Count,Students,Teachers
+ , ,0,0,0
+
+Subjects Info, ,Lead Teacher,Part of class
+ ,Test subject
+ , ,Petar Angelov,Business 293
+ ,apsodasdbk
+ , ,Josef Sporer,Medicine 330
+ ,subject for new class69
+ , ,Petar Angelov,another new test class
+ ,asdasdasd
+ , ,Lenora Gutkowski,another test 543246874968479684797
+ ,kjdkjaskjasdkhasdkh asddkasd
+ , ,Josef Sporer,asdsadsad
+Attendances Info, ,Teacher,For Class,Student,Attending?
+ ,2024-03-23 13:42:49 UTC
+ , ,Daron Dare III,asdasd lkasdd kjasdlkasd,Josef Sporer,present
+ ,2024-03-23 13:49:26 UTC
+ , ,Daron Dare III,another test 543246874968479684797,Carolina Goodwin,absent
+ ,2024-03-23 14:55:44 UTC
+ , ,Daron Dare III,Medicine 330,Carolina Goodwin,present

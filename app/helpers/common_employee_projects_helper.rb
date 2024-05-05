@@ -17,6 +17,5 @@ module CommonEmployeeProjectsHelper
   def sorted_projects_info(project)
     JSON
       .parse(project&.projects_info || '{}')
-      .sort {|x, y| y['sum'] - x['sum'] }
   end
 end

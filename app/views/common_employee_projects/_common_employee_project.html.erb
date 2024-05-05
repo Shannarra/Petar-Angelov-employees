@@ -25,7 +25,7 @@
                     <td scope="col"><b>Additional details</b></td>
                 </thead>
                 <tbody>
-                    <% sorted_projects_info(common_employee_project).each_with_index do |hash, idx| %>
+                    <% JSON.parse(common_employee_project&.projects_info || '{}').each_with_index do |hash, idx| %>
                         <tr>
                             <td><b><%= idx + 1 %></b></td>
                             <td><%= hash['employee_a'] %></td>
