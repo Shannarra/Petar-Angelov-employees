@@ -12,7 +12,7 @@ The uploads themselves are handled by a very simple, but effective gem called [C
 When a new `CommonEmployeeProject` record is saved to the database, the application will automatically start a Sidekiq background job asynchronously, that will handle parsing the CSV file provided, manipulates the data and stores it to the corresponding project record. 
 
 ### The worker
-The background worker (workers got renamed to "jobs", but the API of the gem is still the same) can be found in the folder (app/sidekiq/find_employees_that_worked_longest_job.rb)[https://github.com/Shannarra/Petar-Angelov-employees/blob/master/app/sidekiq/find_employees_that_worked_longest_job.rb].
+The background worker (workers got renamed to "jobs", but the API of the gem is still the same) can be found in the file [app/sidekiq/find_employees_that_worked_longest_job.rb](https://github.com/Shannarra/Petar-Angelov-employees/blob/master/app/sidekiq/find_employees_that_worked_longest_job.rb).
 
 It works in several steps:
 
