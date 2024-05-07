@@ -14,7 +14,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
-  config.consider_all_requests_local = true
+  config.consider_all_requests_local = false
 
   # Allow access when running in docker
   config.web_console.whitelisted_ips = ["172.16.0.0/12", "192.168.0.0/16"]
