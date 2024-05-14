@@ -19370,3 +19370,192 @@ Completed 302 Found in 3ms (ActiveRecord: 0.8ms | Allocations: 831)
   Rendering common_employee_projects/index.html.erb
   Rendered common_employee_projects/index.html.erb (Duration: 0.3ms | Allocations: 89)
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (1.7ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:07.505977"], ["updated_at", "2024-05-14 19:04:07.505977"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/common_employee_projects" for 127.0.0.1 at 2024-05-14 19:04:07 +0000
+Processing by CommonEmployeeProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering common_employee_projects/index.html.erb within layouts/application
+  [1m[36mCommonEmployeeProject Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects"[0m
+  Rendered common_employee_projects/index.html.erb within layouts/application (Duration: 6.3ms | Allocations: 1197)
+  Rendered layout layouts/application.html.erb (Duration: 2408.7ms | Allocations: 84065)
+Completed 200 OK in 2427ms (Views: 2423.2ms | ActiveRecord: 1.7ms | Allocations: 95803)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.9ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:09.957811"], ["updated_at", "2024-05-14 19:04:09.957811"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.4ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/common_employee_projects/228" for 127.0.0.1 at 2024-05-14 19:04:09 +0000
+Processing by CommonEmployeeProjectsController#show as HTML
+  Parameters: {"id"=>"228"}
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."id" = $1 LIMIT $2[0m  [["id", 228], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering common_employee_projects/show.html.erb within layouts/application
+  Rendered common_employee_projects/_common_employee_project.html.erb (Duration: 2.3ms | Allocations: 869)
+  Rendered common_employee_projects/show.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1297)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | Allocations: 2160)
+Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 0.3ms | Allocations: 2787)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+Started GET "/common_employee_projects/new" for 127.0.0.1 at 2024-05-14 19:04:09 +0000
+Processing by CommonEmployeeProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering common_employee_projects/new.html.erb within layouts/application
+  Rendered common_employee_projects/_form.html.erb (Duration: 7.4ms | Allocations: 1984)
+  Rendered common_employee_projects/new.html.erb within layouts/application (Duration: 8.4ms | Allocations: 2241)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 3104)
+Completed 200 OK in 12ms (Views: 11.5ms | ActiveRecord: 0.0ms | Allocations: 3484)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.5ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:09.993949"], ["updated_at", "2024-05-14 19:04:09.993949"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.5ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCommonEmployeeProject Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+Started POST "/common_employee_projects" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#create as HTML
+  Parameters: {"common_employee_project"=>{"file"=>"MyString", "upload_state"=>"processing"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.4ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.014674"], ["updated_at", "2024-05-14 19:04:10.014674"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects/230
+Completed 302 Found in 6ms (ActiveRecord: 1.3ms | Allocations: 1774)
+  [1m[36mCommonEmployeeProject Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/common_employee_projects" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#create as HTML
+  Parameters: {"common_employee_project"=>{"file"=>"MyString", "upload_state"=>"processing"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.5ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.027244"], ["updated_at", "2024-05-14 19:04:10.027244"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.5ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects/231
+Completed 302 Found in 6ms (ActiveRecord: 1.4ms | Allocations: 1033)
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" ORDER BY "common_employee_projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCommonEmployeeProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+Started POST "/common_employee_projects" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#create as HTML
+  Parameters: {"common_employee_project"=>{"asd"=>"123"}}
+[31mUnpermitted parameter: :asd. Context: { controller: CommonEmployeeProjectsController, action: create, request: #<ActionDispatch::Request:0x00007b33e6432638>, params: {"common_employee_project"=>{"asd"=>"123"}, "controller"=>"common_employee_projects", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.4ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 0], ["created_at", "2024-05-14 19:04:10.039811"], ["updated_at", "2024-05-14 19:04:10.039811"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.4ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mCommonEmployeeProject Update (0.9ms)[0m  [1m[33mUPDATE "common_employee_projects" SET "upload_state" = $1, "updated_at" = $2 WHERE "common_employee_projects"."id" = $3[0m  [["upload_state", 2], ["updated_at", "2024-05-14 19:04:10.043197"], ["id", 232]]
+  [1m[36mCommonEmployeeProject Load (0.9ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mCommonEmployeeProject Update (0.5ms)[0m  [1m[33mUPDATE "common_employee_projects" SET "upload_state" = $1, "updated_at" = $2 WHERE "common_employee_projects"."id" = $3[0m  [["upload_state", 4], ["updated_at", "2024-05-14 19:04:10.047982"], ["id", 232]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects/232
+Completed 302 Found in 13ms (ActiveRecord: 3.9ms | Allocations: 2109)
+  [1m[36mCommonEmployeeProject Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" ORDER BY "common_employee_projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+Started POST "/common_employee_projects" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#create as HTML
+  Parameters: {"common_employee_project"=>{"asd"=>"123"}}
+[31mUnpermitted parameter: :asd. Context: { controller: CommonEmployeeProjectsController, action: create, request: #<ActionDispatch::Request:0x00007b33e63ee898>, params: {"common_employee_project"=>{"asd"=>"123"}, "controller"=>"common_employee_projects", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.3ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 0], ["created_at", "2024-05-14 19:04:10.057359"], ["updated_at", "2024-05-14 19:04:10.057359"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mCommonEmployeeProject Update (0.4ms)[0m  [1m[33mUPDATE "common_employee_projects" SET "upload_state" = $1, "updated_at" = $2 WHERE "common_employee_projects"."id" = $3[0m  [["upload_state", 2], ["updated_at", "2024-05-14 19:04:10.060374"], ["id", 233]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mCommonEmployeeProject Update (0.5ms)[0m  [1m[33mUPDATE "common_employee_projects" SET "upload_state" = $1, "updated_at" = $2 WHERE "common_employee_projects"."id" = $3[0m  [["upload_state", 4], ["updated_at", "2024-05-14 19:04:10.062917"], ["id", 233]]
+  [1m[36mCommonEmployeeProject Load (0.7ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects/233
+Completed 302 Found in 11ms (ActiveRecord: 3.1ms | Allocations: 1915)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.3ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.071828"], ["updated_at", "2024-05-14 19:04:10.071828"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.2ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+Started DELETE "/common_employee_projects/234" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#destroy as HTML
+  Parameters: {"id"=>"234"}
+  [1m[36mCommonEmployeeProject Load (0.5ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."id" = $1 LIMIT $2[0m  [["id", 234], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Destroy (0.4ms)[0m  [1m[31mDELETE FROM "common_employee_projects" WHERE "common_employee_projects"."id" = $1[0m  [["id", 234]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects
+Completed 302 Found in 6ms (ActiveRecord: 1.5ms | Allocations: 1258)
+  [1m[36mCommonEmployeeProject Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "common_employee_projects"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.3ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.087247"], ["updated_at", "2024-05-14 19:04:10.087247"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.2ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/common_employee_projects/235" for 127.0.0.1 at 2024-05-14 19:04:10 +0000
+Processing by CommonEmployeeProjectsController#destroy as HTML
+  Parameters: {"id"=>"235"}
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."id" = $1 LIMIT $2[0m  [["id", 235], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Destroy (0.2ms)[0m  [1m[31mDELETE FROM "common_employee_projects" WHERE "common_employee_projects"."id" = $1[0m  [["id", 235]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/common_employee_projects
+Completed 302 Found in 3ms (ActiveRecord: 0.8ms | Allocations: 831)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.5ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.115354"], ["updated_at", "2024-05-14 19:04:10.115354"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.4ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.9ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.119729"], ["updated_at", "2024-05-14 19:04:10.119729"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering common_employee_projects/index.html.erb
+  Rendered common_employee_projects/index.html.erb (Duration: 0.3ms | Allocations: 116)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.4ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.130579"], ["updated_at", "2024-05-14 19:04:10.130579"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.3ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mCommonEmployeeProject Create (0.3ms)[0m  [1m[32mINSERT INTO "common_employee_projects" ("file", "upload_state", "created_at", "updated_at", "projects_info") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["file", nil], ["upload_state", 2], ["created_at", "2024-05-14 19:04:10.133323"], ["updated_at", "2024-05-14 19:04:10.133323"], ["projects_info", nil]]
+  [1m[36mCommonEmployeeProject Load (0.2ms)[0m  [1m[34mSELECT "common_employee_projects".* FROM "common_employee_projects" WHERE "common_employee_projects"."upload_state" = $1 ORDER BY "common_employee_projects"."id" DESC LIMIT $2[0m  [["upload_state", 0], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  Rendering common_employee_projects/index.html.erb
+  Rendered common_employee_projects/index.html.erb (Duration: 0.2ms | Allocations: 89)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
