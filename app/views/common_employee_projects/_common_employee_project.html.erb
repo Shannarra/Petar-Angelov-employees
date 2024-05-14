@@ -10,6 +10,7 @@
         Upload <%= common_employee_project.errorneous? ? 'has failed' : 'was successful' %>!
     </h2>
 
+    <h1><%= common_employee_project.created_at %></h1>
     <% if state == 'errorneous' %>
         <h4 class="text-center">
             Reason: The uploaded file was not in the correct format.

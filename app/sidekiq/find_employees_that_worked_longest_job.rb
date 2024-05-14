@@ -17,6 +17,9 @@ class FindEmployeesThatWorkedLongestJob
 
       combined = match_employees_on_overlap!(grouped)
 
+      # or use an optimized two-pointer version:
+      # combined = match_overlap_v2(grouped)
+
       sanitize_and_save_combined_data!(combined)
     rescue StandardError => e
       @project.update(upload_state: :errorneous)
@@ -103,5 +106,54 @@ class FindEmployeesThatWorkedLongestJob
   def tenure_overlap(first, second)
     return nil if (first.max < second.begin or second.max < first.begin)
     [first.begin, second.begin].max..[first.max, second.max].min
+  end
+
+  def match_overlap_v2(grouped)
+    grouped.each_with_object({}) do |(project, project_values), overlap_table|
+      x, y = 0, 0
+
+      loop do
+        if x == project_values.length - 1
+          break
+        elsif y == project_values.length - 1
+          y = 0
+          x += 1
+        end
+
+        employee_a = project_values[x]
+        employee_b = project_values[y]
+
+        y += 1
+
+        # 1. Skip duplicates
+        next if employee_a[:employee] == employee_b[:employee]
+
+        employee_a_tenure = employee_a[:start_date]..employee_a[:end_date]
+        employee_b_tenure = employee_b[:start_date]..employee_b[:end_date]
+
+        # 2. If tenure does not overlap, no need to do anything, skip
+        next unless (employee_a_tenure).overlaps?(employee_b_tenure)
+
+        # 3. There is some overlap, prepare the table if needed
+        overlap = tenure_overlap(employee_a_tenure, employee_b_tenure)
+        uniq_key = "#{employee_a[:employee]}+#{employee_b[:employee]}";
+
+        overlap_table[uniq_key] ||= {
+          employee_a: employee_a[:employee],
+          employee_b: employee_b[:employee],
+          sum: 0,
+          details: []
+        }
+
+        # 4. Convert the overlap to days and store it
+        overlap_as_days = (overlap.max.to_date - overlap.min.to_date).to_i
+        overlap_table[uniq_key][:details] << {
+          project: project,
+          days: overlap_as_days
+        }
+
+        overlap_table[uniq_key][:sum] += overlap_as_days
+      end
+    end
   end
 end
